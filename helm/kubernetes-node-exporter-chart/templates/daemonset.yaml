@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
+    giantswarm.io/service-type: "managed"
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      labels:
+        app: {{ .Values.name }}
+        giantswarm.io/service-type: "managed"
+    spec:
+      tolerations:
+      # Tolerate all taints for observability
+      - operator: "Exists"
+      securityContext:
+        runAsUser: {{ .Values.userID }}
+        runAsGroup: {{ .Values.userGroup }}
+      priorityClassName: giantswarm-critical
+      containers:
+      - image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Values.name }}
+        ports:
+        - name: metrics
+          containerPort: {{ .Values.port }}
+        args:
+        - '--log.level=info'
+        - '--path.rootfs=/rootfs'
+        - '--web.listen-address=:{{ .Values.port }}'
+
+        - '--collector.arp'
+        - '--collector.bcache'
+        - '--collector.conntrack'
+        - '--collector.cpu'
+        - '--collector.edac'
+        - '--collector.entropy'
+        - '--collector.filefd'
+        - '--collector.filesystem'
+        - '--collector.hwmon'
+        - '--collector.loadavg'
+        - '--collector.mdadm'
+        - '--collector.meminfo'
+        - '--collector.netdev'
+        - '--collector.netstat'
+        - '--collector.sockstat'
+        - '--collector.stat'
+        - '--collector.systemd'
+        - '--collector.time'
+        - '--collector.timex'
+        - '--collector.uname'
+        - '--collector.vmstat'
+        - '--collector.xfs'
+
+        - '--no-collector.diskstats'
+        - '--no-collector.infiniband'
+        - '--no-collector.ipvs'
+        - '--no-collector.textfile'
+        - '--no-collector.wifi'
+        - '--no-collector.zfs'
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.port }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.port }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - name: root
+          mountPath: /rootfs
+          readOnly: true
+        - name: dbus
+          mountPath: /var/run/dbus
+          readOnly: true
+        # go-systemd hardcodes the systemd socket path,
+        # so --path.rootfs is not respected.
+        # We mount the socket in to the correct path to get around this.
+        - name: systemd
+          mountPath: /run/systemd
+          readOnly: true
+      volumes:
+      - name: root
+        hostPath:
+          path: /
+      - name: dbus
+        hostPath:
+          path: /var/run/dbus
+      - name: systemd
+        hostPath:
+          path: /run/systemd
+      serviceAccountName: {{ .Values.name }}
+      hostNetwork: true
+      hostPID: true

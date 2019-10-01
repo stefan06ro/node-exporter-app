@@ -1,0 +1,29 @@
+# Default values for node-exporter-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+name: node-exporter
+namespace: kube-system
+port: 10300
+
+# Run as root user to get proper permissions
+userID: 0
+groupID: 0
+
+image:
+  registry: quay.io
+  repository: giantswarm/node-exporter
+  tag: v0.18.0-giantswarm
+
+resources:
+  limits:
+    memory: 50Mi
+  requests:
+    cpu: 75m
+    memory: 50Mi
+
+test:
+  image:
+    registry: quay.io
+    repository: giantswarm/alpine-testing
+    tag: 0.1.0
