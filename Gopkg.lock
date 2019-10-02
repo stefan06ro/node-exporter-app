@@ -150,14 +150,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:a8227c97ea1e82b49161d7b8ba409aba78d81b0745c529ce623b25592a6704e7"
+  digest = "1:18b8a435ca76c0495d656d582efbafd5f4d2794fe220f4ade2866295d7a2178b"
   name = "github.com/giantswarm/e2etests"
   packages = [
-    "managedservices",
-    "managedservices/legacyresource",
+    "basicapp",
+    "basicapp/legacyresource",
   ]
   pruneopts = "UT"
-  revision = "f024c8fd5a0d870d621bedb553d1591d851b935e"
+  revision = "71d00db6dc5d285af80f446395bfc8bcf2d0cf64"
 
 [[projects]]
   branch = "master"
@@ -889,7 +889,7 @@
     "github.com/giantswarm/e2esetup/chart",
     "github.com/giantswarm/e2esetup/chart/env",
     "github.com/giantswarm/e2esetup/k8s",
-    "github.com/giantswarm/e2etests/managedservices",
+    "github.com/giantswarm/e2etests/basicapp",
     "github.com/giantswarm/helmclient",
     "github.com/giantswarm/k8sclient",
     "github.com/giantswarm/micrologger",
