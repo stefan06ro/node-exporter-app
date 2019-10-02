@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## 0.6.0 2019-10-02
+
+- Migrated to be deployed via an app CR not a chartconfig CR.
+
 ## [0.5.1] 2019-07-17
 
 ### Changed
@@ -45,8 +49,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Separate pod security policy for node-exporter and node-exporter-migration workloads.
 - Security context with non-root user (`nobody`) for running node-exporter inside container.
 
-[Unreleased]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.5.0...HEAD
-[Unreleased]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.4.1...v0.5.1
 [0.4.1]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v0.2.0...v0.3.0
