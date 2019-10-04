@@ -8,55 +8,47 @@ import (
 	"os"
 	"testing"
 
-	"github.com/giantswarm/apprclient"
 	e2esetup "github.com/giantswarm/e2esetup/chart"
 	"github.com/giantswarm/e2esetup/chart/env"
 	"github.com/giantswarm/e2esetup/k8s"
-	"github.com/giantswarm/e2etests/managedservices"
+	"github.com/giantswarm/e2etests/basicapp"
 	"github.com/giantswarm/helmclient"
 	"github.com/giantswarm/k8sclient"
 	"github.com/giantswarm/micrologger"
-	"github.com/spf13/afero"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/giantswarm/kubernetes-node-exporter/integration/templates"
+	"github.com/giantswarm/node-exporter-app/integration/templates"
 )
 
 const (
-	testName = "basic"
+	appName = "node-exporter"
+)
 
-	appName   = "node-exporter"
-	chartName = "kubernetes-node-exporter"
+const (
+	envVarTarballURL = "E2E_TARBALL_URL"
 )
 
 var (
-	a          *apprclient.Client
+	ba         *basicapp.BasicApp
 	helmClient *helmclient.Client
 	k8sSetup   *k8s.Setup
 	l          micrologger.Logger
-	ms         *managedservices.ManagedServices
+	tarballURL string
 )
 
 func init() {
 	var err error
 
 	{
-		c := micrologger.Config{}
-		l, err = micrologger.New(c)
-		if err != nil {
-			panic(err.Error())
+		tarballURL = os.Getenv(envVarTarballURL)
+		if tarballURL == "" {
+			panic(fmt.Sprintf("env var '%s' must not be empty", envVarTarballURL))
 		}
 	}
 
 	{
-		c := apprclient.Config{
-			Fs:     afero.NewOsFs(),
-			Logger: l,
-
-			Address:      "https://quay.io",
-			Organization: "giantswarm",
-		}
-		a, err = apprclient.New(c)
+		c := micrologger.Config{}
+		l, err = micrologger.New(c)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -91,7 +83,7 @@ func init() {
 		c := helmclient.Config{
 			Logger:     l,
 			K8sClient:  k8sClients.K8sClient(),
-			RestConfig: k8sClients.RestConfig(),
+			RestConfig: k8sClients.RESTConfig(),
 
 			TillerNamespace: "giantswarm",
 		}
@@ -102,21 +94,20 @@ func init() {
 	}
 
 	{
-		c := managedservices.Config{
-			ApprClient: a,
+		c := basicapp.Config{
 			Clients:    k8sClients,
 			HelmClient: helmClient,
 			Logger:     l,
 
-			ChartConfig: managedservices.ChartConfig{
-				ChannelName:     fmt.Sprintf("%s-%s", env.CircleSHA(), testName),
-				ChartName:       chartName,
+			App: basicapp.Chart{
+				Name:            appName,
 				ChartValues:     templates.NodeExporterValues,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
+				URL:             tarballURL,
 			},
-			ChartResources: managedservices.ChartResources{
-				DaemonSets: []managedservices.DaemonSet{
+			ChartResources: basicapp.ChartResources{
+				DaemonSets: []basicapp.DaemonSet{
 					{
 						Name:      appName,
 						Namespace: metav1.NamespaceSystem,
@@ -131,7 +122,7 @@ func init() {
 				},
 			},
 		}
-		ms, err = managedservices.New(c)
+		ba, err = basicapp.New(c)
 		if err != nil {
 			panic(err.Error())
 		}
