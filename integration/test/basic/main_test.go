@@ -21,8 +21,7 @@ import (
 )
 
 const (
-	appName   = "node-exporter"
-	chartName = "kubernetes-node-exporter"
+	appName = "node-exporter"
 )
 
 const (
@@ -84,7 +83,7 @@ func init() {
 		c := helmclient.Config{
 			Logger:     l,
 			K8sClient:  k8sClients.K8sClient(),
-			RestConfig: k8sClients.RestConfig(),
+			RestConfig: k8sClients.RESTConfig(),
 
 			TillerNamespace: "giantswarm",
 		}
@@ -101,7 +100,7 @@ func init() {
 			Logger:     l,
 
 			App: basicapp.Chart{
-				Name:            chartName,
+				Name:            appName,
 				ChartValues:     templates.NodeExporterValues,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
