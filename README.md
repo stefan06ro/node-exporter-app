@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/node-exporter-app.svg?style=shield&circle-token=0a5aafcebabaed6f39a57293a96427f907674276)](https://circleci.com/gh/giantswarm/node-exporter-app)
+[![CircleCI](https://circleci.com/gh/giantswarm/node-exporter-app.svg?style=shield)](https://circleci.com/gh/giantswarm/node-exporter-app)
 
 # node-exporter
 
