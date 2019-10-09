@@ -27,7 +27,7 @@ spec:
         runAsGroup: {{ .Values.userGroup }}
       priorityClassName: giantswarm-critical
       containers:
-      - image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         name: {{ .Values.name }}
         ports:
         - name: metrics
