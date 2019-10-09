@@ -12,7 +12,7 @@ groupID: 0
 
 image:
   registry: quay.io
-  repository: giantswarm/node-exporter
+  name: giantswarm/node-exporter
   tag: v0.18.0-giantswarm
 
 resources:
