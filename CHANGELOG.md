@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Updated to node-exporter version 0.18.1
+
 ## 0.6.0 2019-10-02
 
 - Migrated to be deployed via an app CR not a chartconfig CR.
