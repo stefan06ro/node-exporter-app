@@ -7,7 +7,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [1.1.0] 2019-11-20
 
-Note: Version number 1.0.0 was skipped to align with app catalog versioning (release 0.6.0 was the first app CR deployment).
+Note: Version number 1.0.0 was skipped to align the version with other default apps.
 
 ### Changed
 
