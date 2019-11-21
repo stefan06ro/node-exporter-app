@@ -5,9 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] 2019-11-20
 
-## 0.6.0 2019-10-02
+Note: Version number 1.0.0 was skipped to align the version with other default apps.
+
+### Changed
+
+- Updated to node-exporter version 0.18.1.
+
+## [0.6.0] 2019-10-02
+
+### Changed 
 
 - Migrated to be deployed via an app CR not a chartconfig CR.
 
