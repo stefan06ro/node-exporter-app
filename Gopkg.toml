@@ -34,46 +34,48 @@ required = [
 
 
 [[constraint]]
-  branch = "master"
   name = "github.com/docker/distribution"
+  branch = "master"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/giantswarm/e2esetup"
+  branch = "master"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/giantswarm/e2etests"
+  branch = "master"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/giantswarm/helmclient"
-
-[[constraint]]
   branch = "master"
-  name = "github.com/giantswarm/k8sclient"
 
 [[constraint]]
-  name = "k8s.io/apiserver"
-  version = "kubernetes-1.15.4"
+  name = "github.com/giantswarm/k8sclient"
+  branch = "master"
 
-
+[[constraint]]
+  name = "k8s.io/apimachinery"
+  version = "kubernetes-1.16.3"
 
 [[override]]
-  name = "k8s.io/apimachinery"
-  version = "kubernetes-1.15.4"
+  name = "k8s.io/apiserver"
+  version = "kubernetes-1.16.3"
 
 [[override]]
   name = "k8s.io/cli-runtime"
-  version = "kubernetes-1.15.4"
-
-[[override]]
-  name = "k8s.io/kubernetes"
-  version = "v1.15.4"
+  version = "kubernetes-1.16.3"
 
 [[override]]
   name = "k8s.io/component-base"
-  version = "kubernetes-1.15.4"
+  version = "kubernetes-1.16.3"
+
+[[override]]
+  name = "k8s.io/kubectl"
+  version = "kubernetes-1.16.3"
+
+[[override]]
+  name = "k8s.io/kubernetes"
+  version = "v1.16.3"
 
 [[override]]
   name = "github.com/ghodss/yaml"
