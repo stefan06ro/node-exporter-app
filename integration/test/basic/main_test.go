@@ -15,8 +15,6 @@ import (
 	"github.com/giantswarm/k8sclient"
 	"github.com/giantswarm/micrologger"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
-	"github.com/giantswarm/node-exporter-app/integration/templates"
 )
 
 const (
@@ -100,7 +98,6 @@ func init() {
 
 			App: basicapp.Chart{
 				Name:            appName,
-				ChartValues:     templates.NodeExporterValues,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
 				URL:             tarballURL,
