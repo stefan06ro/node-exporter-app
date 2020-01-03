@@ -79,8 +79,8 @@ workflows:
           app_catalog: "default-catalog"
           app_catalog_test: "default-test-catalog"
           chart: "node-exporter-app"
-          # Trigger job on git tag.
           filters:
+            # Trigger the job also on git tag.
             tags:
               only: /^v.*/
 
@@ -89,6 +89,7 @@ workflows:
             - build
             - push-to-default-app-catalog
           filters:
+            # Do not trigger the job on merge to master.
             branches:
               ignore:
                 - master
