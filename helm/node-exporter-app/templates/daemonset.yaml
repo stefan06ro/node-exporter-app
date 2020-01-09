@@ -25,7 +25,7 @@ spec:
       securityContext:
         runAsUser: {{ .Values.userID }}
         runAsGroup: {{ .Values.userGroup }}
-      priorityClassName: giantswarm-critical
+      priorityClassName: system-node-critical
       containers:
       - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         name: {{ .Values.name }}
