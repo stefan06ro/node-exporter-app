@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: "v0.18.1"
+appVersion: "v1.0.1"
 description: A Helm chart for Kubernetes Node-Exporter Service
 home: https://github.com/giantswarm/node-exporter-app
 name: node-exporter-app

@@ -63,7 +63,10 @@ spec:
         - '--no-collector.diskstats'
         - '--no-collector.infiniband'
         - '--no-collector.ipvs'
+        - '--no-collector.powersupplyclass'
+        - '--no-collector.schedstat'
         - '--no-collector.textfile'
+        - '--no-collector.udp_queues'
         - '--no-collector.wifi'
         - '--no-collector.zfs'
         livenessProbe:
