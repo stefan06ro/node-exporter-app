@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.3.0] - 2020-07-23
+
 ### Added
 
 - Added workflows for automatic releases.
@@ -80,7 +82,8 @@ Note: Version number 1.0.0 was skipped to align the version with other default a
 - Separate pod security policy for node-exporter and node-exporter-migration workloads.
 - Security context with non-root user (`nobody`) for running node-exporter inside container.
 
-[Unreleased]: https://github.com/giantswarm/kubernetes-node-exporter/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/giantswarm/node-exporter-app/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/giantswarm/node-exporter-app/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/giantswarm/node-exporter-app/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/giantswarm/node-exporter-app/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/giantswarm/node-exporter-app/compare/v0.6.0...v1.1.0
