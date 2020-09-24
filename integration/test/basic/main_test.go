@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/giantswarm/appcatalog"
@@ -31,11 +32,30 @@ var (
 	k8sSetup   *k8sclient.Setup
 	l          micrologger.Logger
 	tarballURL string
+
+	gitCommit  string
+	gitBranch  string
+	appVersion string
+	chartID    string
 )
 
 func init() {
 	ctx := context.Background()
 	var err error
+
+	{
+		gitCommit = os.Getenv("TEST_GIT_COMMIT")
+		gitBranch = os.Getenv("TEST_GIT_BRANCH")
+		appVersion = os.Getenv("TEST_APP_VERSION")
+
+		chartID = fmt.Sprintf("%s-%s", appName, os.Getenv("TEST_PROJECT_VERSION"))
+		// chartID has to match `define "chart"` from _helpers.tpl
+		chartID = strings.Replace(chartID, "+", "_", 0)
+		if len(chartID) > 63 {
+			chartID = chartID[:63]
+		}
+		chartID = strings.TrimSuffix(chartID, "-")
+	}
 
 	var latestRelease string
 	{
@@ -112,19 +132,28 @@ func init() {
 			ChartResources: basicapp.ChartResources{
 				DaemonSets: []basicapp.DaemonSet{
 					{
-						Name:      app,
+						Name:      appName,
 						Namespace: metav1.NamespaceSystem,
 						Labels: map[string]string{
-							"app":                        app,
-							"giantswarm.io/service-type": "managed",
+							"app":                          app,
+							"app.giantswarm.io/branch":     gitBranch,
+							"app.giantswarm.io/commit":     gitCommit,
+							"app.kubernetes.io/instance":   appName,
+							"app.kubernetes.io/managed-by": "Helm",
+							"app.kubernetes.io/name":       app,
+							"app.kubernetes.io/version":    appVersion,
+							"giantswarm.io/service-type":   "managed",
+							"helm.sh/chart":                chartID,
 						},
 						MatchLabels: map[string]string{
-							"app": app,
+							"app.kubernetes.io/name":     app,
+							"app.kubernetes.io/instance": appName,
 						},
 					},
 				},
 			},
 		}
+
 		ba, err = basicapp.New(c)
 		if err != nil {
 			panic(err.Error())
