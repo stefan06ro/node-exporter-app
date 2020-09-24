@@ -25,7 +25,13 @@ spec:
       securityContext:
         runAsUser: {{ .Values.userID }}
         runAsGroup: {{ .Values.userGroup }}
+      {{- if .Values.Installation }}
+      {{- if ne .Values.Installation.V1.Provider.Kind "kvm" }}
       priorityClassName: system-node-critical
+      {{- end }}
+      {{- else }}
+      priorityClassName: system-node-critical
+      {{- end }}
       containers:
       - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         name: {{ include "resource.default.name" . }}

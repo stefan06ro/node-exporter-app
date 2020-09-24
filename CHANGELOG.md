@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Do not use priorityClass in KVM
+
 ## [1.4.0] - 2020-09-24
 
 ### Changed
