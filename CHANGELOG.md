@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Disable `btrfs`,`softnet`,`rapl` and `thermal_zone` to reduce memory usage.
+
 ## [1.4.1] - 2020-09-24
 
 ### Fixed
