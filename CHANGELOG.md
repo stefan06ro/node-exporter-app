@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Disable `btrfs`,`softnet`,`rapl` and `thermal_zone` to reduce memory usage.
+- Increase memory limit to `75Mi`.
 
 ## [1.4.1] - 2020-09-24
 
