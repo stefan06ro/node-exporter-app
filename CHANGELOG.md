@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.4.2] - 2020-09-30
+
 ### Changed
 
 - Disable `btrfs`,`softnet`,`rapl` and `thermal_zone` to reduce memory usage.
@@ -99,7 +101,8 @@ Note: Version number 1.0.0 was skipped to align the version with other default a
 - Separate pod security policy for node-exporter and node-exporter-migration workloads.
 - Security context with non-root user (`nobody`) for running node-exporter inside container.
 
-[Unreleased]: https://github.com/giantswarm/node-exporter-app/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/giantswarm/node-exporter-app/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/giantswarm/node-exporter-app/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/giantswarm/node-exporter-app/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/giantswarm/node-exporter-app/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/node-exporter-app/compare/v1.2.0...v1.3.0
