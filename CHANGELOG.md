@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## Changed
+
+- Enable the diskstats collector on azure.
+
 ## [1.4.2] - 2020-09-30
 
 ### Changed

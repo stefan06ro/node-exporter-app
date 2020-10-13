@@ -23,3 +23,9 @@ room for such suffix.
 {{- include "resource.default.name" . -}}-pull-secret
 {{- end -}}
 
+{{- define "provider" -}}
+    {{- if .Values.Installation }}
+    {{- .Values.Installation.V1.Provider.Kind }}
+    {{- else -}}
+    {{- end -}}
+{{- end -}}
