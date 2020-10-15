@@ -10,11 +10,11 @@ import (
 	"testing"
 
 	"github.com/giantswarm/appcatalog"
-	e2esetup "github.com/giantswarm/e2esetup/chart"
-	"github.com/giantswarm/e2esetup/chart/env"
-	"github.com/giantswarm/e2etests/basicapp"
-	"github.com/giantswarm/helmclient"
-	"github.com/giantswarm/k8sclient"
+	e2esetup "github.com/giantswarm/e2esetup/v2/chart"
+	"github.com/giantswarm/e2esetup/v2/chart/env"
+	"github.com/giantswarm/e2etests/v2/basicapp"
+	helmclient "github.com/giantswarm/helmclient/v2/pkg/helmclient"
+	k8sclient "github.com/giantswarm/k8sclient/v4/pkg/k8sclient"
 	"github.com/giantswarm/micrologger"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -61,7 +61,7 @@ func init() {
 
 	var latestRelease string
 	{
-		latestRelease, err = appcatalog.GetLatestVersion(ctx, catalogURL, appName)
+		latestRelease, err = appcatalog.GetLatestVersion(ctx, catalogURL, appName, appVersion)
 		if err != nil {
 			panic(err.Error())
 		}
