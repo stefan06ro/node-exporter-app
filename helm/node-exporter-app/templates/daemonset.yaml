@@ -47,9 +47,6 @@ spec:
         - '--collector.bcache'
         - '--collector.conntrack'
         - '--collector.cpu'
-        {{- if eq (include "provider" .) "azure" }}
-        - '--collector.diskstats'
-        {{- end }}
         - '--collector.edac'
         - '--collector.entropy'
         - '--collector.filefd'
@@ -70,9 +67,7 @@ spec:
         - '--collector.xfs'
 
         - '--no-collector.btrfs'
-        {{- if ne (include "provider" .) "azure" }}
         - '--no-collector.diskstats'
-        {{- end }}
         - '--no-collector.infiniband'
         - '--no-collector.ipvs'
         - '--no-collector.powersupplyclass'
