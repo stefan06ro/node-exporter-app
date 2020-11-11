@@ -2,7 +2,7 @@
 
 # node-exporter
 
-Helm Chart for Node Exporter running in Tenant Clusters.
+Helm Chart for [Node Exporter](https://github.com/prometheus/node_exporter) running in Tenant Clusters.
 
 * Installs the [node-exporter service].
 
