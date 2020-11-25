@@ -47,6 +47,7 @@ func init() {
 		gitCommit = os.Getenv("TEST_GIT_COMMIT")
 		gitBranch = os.Getenv("TEST_GIT_BRANCH")
 		gitBranch = strings.ReplaceAll(gitBranch, "#", "-")
+		gitBranch = strings.ReplaceAll(gitBranch, "/", "-")
 
 		appVersion = os.Getenv("TEST_APP_VERSION")
 
@@ -134,7 +135,7 @@ func init() {
 			ChartResources: basicapp.ChartResources{
 				DaemonSets: []basicapp.DaemonSet{
 					{
-						Name:      appName,
+						Name:      strings.ReplaceAll(fmt.Sprintf("%s-%s", appName, appVersion), ".", "-"),
 						Namespace: metav1.NamespaceSystem,
 						Labels: map[string]string{
 							"app":                          app,

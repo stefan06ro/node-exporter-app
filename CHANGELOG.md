@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Change the Kubernetes Daemonset name to include the app version.
+
 ## [1.6.0] - 2020-10-26
 
 ### Changed

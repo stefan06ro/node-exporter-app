@@ -7,6 +7,11 @@ suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
 characters for resource names, the stem is truncated to 47 characters to leave
 room for such suffix.
 */}}
+
+{{- define "resource.daemonset.name" -}}
+{{- printf "%s-%s" .Release.Name .Chart.AppVersion | replace "." "-" | trunc 47 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "resource.default.name" -}}
 {{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
