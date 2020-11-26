@@ -48,6 +48,7 @@ func init() {
 		gitBranch = os.Getenv("TEST_GIT_BRANCH")
 		gitBranch = strings.ReplaceAll(gitBranch, "#", "-")
 		gitBranch = strings.ReplaceAll(gitBranch, "/", "-")
+		gitBranch = strings.ReplaceAll(gitBranch, ".", "-")
 
 		appVersion = os.Getenv("TEST_APP_VERSION")
 
