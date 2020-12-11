@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Use the domain registry from installation values if it is present.
+
 ## [1.7.0] - 2020-11-26
 
 ### Changed
