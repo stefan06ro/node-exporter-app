@@ -29,7 +29,18 @@ workflows:
                 - master
           requires:
             - push-to-default-app-catalog
-            - push-node-exporter-to-control-plane-app-catalog
+
+      - architect/integration-test:
+          name: "upgrade-integration-test"
+          install-app-platform: true
+          test-dir: "integration/test/upgrade"
+          filters:
+            # Do not trigger the job on merge to master.
+            branches:
+              ignore:
+                - master
+          requires:
+            - push-to-default-app-catalog
 
       - architect/push-to-app-catalog:
           context: architect

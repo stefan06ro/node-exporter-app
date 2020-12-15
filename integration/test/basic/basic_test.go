@@ -11,6 +11,8 @@ import (
 	"github.com/giantswarm/backoff"
 	"github.com/giantswarm/microerror"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	"github.com/giantswarm/node-exporter-app/integration/key"
 )
 
 // TestDaemonSets ensures that node-exporter daemonset are deployed
@@ -27,17 +29,17 @@ func TestDaemonSets(t *testing.T) {
 func checkDaemonsetExists(ctx context.Context) error {
 	var err error
 
-	l.LogCtx(ctx, "level", "debug", "message", "waiting for daemonset create")
+	config.Logger.Debugf(ctx, "waiting for daemonset create")
 
 	o := func() error {
 		lo := metav1.ListOptions{
-			LabelSelector: fmt.Sprintf("%s=%s", "app.kubernetes.io/name", app),
+			LabelSelector: fmt.Sprintf("%s=%s", "app.kubernetes.io/name", key.AppName()),
 		}
-		daemonsets, err := appTest.K8sClient().AppsV1().DaemonSets(metav1.NamespaceSystem).List(ctx, lo)
+		daemonsets, err := config.AppTest.K8sClient().AppsV1().DaemonSets(metav1.NamespaceSystem).List(ctx, lo)
 		if err != nil {
 			return microerror.Mask(err)
 		} else if len(daemonsets.Items) == 0 {
-			return microerror.Maskf(executionFailedError, "daemonset %#q in %#q not found", app, metav1.NamespaceSystem)
+			return microerror.Maskf(executionFailedError, "daemonset %#q in %#q not found", key.AppName(), metav1.NamespaceSystem)
 		}
 
 		daemonset := daemonsets.Items[0]
@@ -49,14 +51,14 @@ func checkDaemonsetExists(ctx context.Context) error {
 		return nil
 	}
 	b := backoff.NewConstant(2*time.Minute, 5*time.Second)
-	n := backoff.NewNotifier(l, ctx)
+	n := backoff.NewNotifier(config.Logger, ctx)
 
 	err = backoff.RetryNotify(o, b, n)
 	if err != nil {
 		return microerror.Mask(err)
 	}
 
-	l.LogCtx(ctx, "level", "debug", "message", "daemonsets are ready")
+	config.Logger.Debugf(ctx, "daemonsets are ready")
 
 	return nil
 }
