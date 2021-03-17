@@ -93,3 +93,17 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v.*/
+              
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-node-exporter-to-vmware-app-collection
+          app_name: "node-exporter-app"
+          app_namespace: "monitoring"
+          app_collection_repo: "vmware-app-collection"
+          requires:
+            - push-node-exporter-to-control-plane-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
