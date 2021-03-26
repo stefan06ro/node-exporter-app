@@ -14,7 +14,7 @@ userID: 0
 groupID: 0
 
 image:
-  registry: quay.io
+  registry: docker.io
   name: giantswarm/node-exporter
   tag: v1.0.1-giantswarm
 
@@ -27,6 +27,6 @@ resources:
 
 test:
   image:
-    registry: quay.io
+    registry: docker.io
     repository: giantswarm/alpine-testing
     tag: 0.1.0
