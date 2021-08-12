@@ -29,8 +29,8 @@ room for such suffix.
 {{- end -}}
 
 {{- define "provider" -}}
-    {{- if .Values.Installation }}
-    {{- .Values.Installation.V1.Provider.Kind }}
+    {{- if .Values.isManagementCluster }}
+    {{- .Values.provider.kind }}
     {{- else -}}
     {{- end -}}
 {{- end -}}

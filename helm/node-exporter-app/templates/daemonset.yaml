@@ -25,8 +25,8 @@ spec:
       securityContext:
         runAsUser: {{ .Values.userID }}
         runAsGroup: {{ .Values.userGroup }}
-      {{- if .Values.Installation }}
-      {{- if ne .Values.Installation.V1.Provider.Kind "kvm" }}
+      {{- if .Values.isManagementCluster }}
+      {{- if ne .Values.provider.kind "kvm" }}
       priorityClassName: system-node-critical
       {{- end }}
       {{- else }}
@@ -34,8 +34,8 @@ spec:
       {{- end }}
       containers:
       - name: {{ include "resource.default.name" . }}
-        {{- if .Values.Installation }}
-        image: "{{ .Values.Installation.V1.Registry.Domain }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        {{- if .Values.isManagementCluster }}
+        image: "{{ .Values.registry.domain }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         {{- else }}
         image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         {{- end }}

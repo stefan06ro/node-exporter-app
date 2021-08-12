@@ -30,3 +30,7 @@ test:
     registry: docker.io
     repository: giantswarm/alpine-testing
     tag: 0.1.0
+
+isManagementCluster: false
+registry:
+  domain: docker.io
